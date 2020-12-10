@@ -6,24 +6,26 @@ namespace App\ValueObject;
 
 class Money 
 {
+    CONST DEFAULT_CURRENCY = "PLN";
     private $amount;
-    const DEFAULT_CURRENCY = "PLN";
-
+    
     public function __construct(int $amount, string $currency = self::DEFAULT_CURRENCY) 
     {
-        $this->amount = $amount;
         $this->currency = $currency;
+        $this->amount = $amount;
     }
 
-    public function getAmount()
+    public function getCurrency() :string
+    {
+        return $this->currency;
+    }
+
+    public function getAmount() :int
     {
         return $this->amount;
     }
 
-    public function getCurrency()
-    {
-        return self::DEFAULT_CURRENCY;
-    }
+   
 }
 
 $pay = new Money (1098);
