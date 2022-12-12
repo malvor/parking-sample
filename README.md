@@ -57,3 +57,26 @@ jeżeli inne miejsca są zajęte, a parking posiada wolne miejsca dla taxi.
     * Klasa powinna implementować gettery dla każdego atrybutu
     * Klasa powinna posiadać settery dla atrybutów parkingEndDate oraz price    
 
+3. Uzupełnij klasę City o następujące
+   * **addNewParking** - Metoda powinna przyjąć interfece **ParkingInterface** i dodać do listy parkingów ($this->parkings) nowy parking w mieście 
+   * **removeParking** - Metoda powinna wyszukać i usunąć dany parking z listy parkingów na podstawie argumentu ParkingInterface. Jeżeli danego parkingu nie ma na liście, powinien wyrzucić wyjątek \Exception('Parking not found')
+   * **getTotalParking** - Metoda zlicza i zwraca ilość parkingów  
+   * **getTotalParkingCapacities** - Metoda przyjmuje argument w postaci interfejsu ParkingInterface, a następnie zwraca ilość miejsc parkingowych w danego typu (np. CarParking)
+
+4. Uzupełnij interfejs ParkingInterface o następujące metody:
+   * Dodaj metodę "park", która przyjmie jako argument interfejs **VehicleInterface**
+   * Dodaj metodę "getPrice", która przyjmie 2 argumenty - datę rozpopczęcia i zakończenia parkowania, oraz zwróci wartość Money
+5. Stwórz klasę **AbstractParking** która zaimplementuje obie metody z interfejsu ParkingInterface w następujący sposób: (klasa powinna implementować interface **ParkingInterface**)
+   * będzie posiadała abstrakcyjną prywatną metodę "canPark", która sprawdzi czy VehicleInterface moze być zaparkowany na danym typie parkingu
+   * **park** - metoda sprawdzi przy pomocy **canPark** czy pojazd może zostać zaparkowany, jeżeli nie, wyrzuci wyjątek \Exception("This vehicle cannot park here!")
+   * **getPrice** - która na podstawie parametru "pricePerHour" wyliczy ile klient musi zapłacić za parking. PricePerHour oznacza cenę za każdą rozpoczętą godzinę
+   * **hasFreePlace** - metoda protected, która sprawdza, czy na parkingu istnieje jakieś wolne miejsce 
+   * **construct** - konstruktor który przyjmuje następujące parametry:
+     * **pricePerHour** - typu money, które okresla cenę za każdą rozpoczętą godzinę
+     * **numberOfPlaces** - ilość miejsc parkingowych
+6. Rozszerzy wszystkie klasy parking o AbstractParking i dopisze następujące warunki do **canPark**
+   * **BikeParking** - Tylko pojazdy typu Bike mogą parkować na tym parkingu
+   * **BusParking** - Tylko pojazdy typu "Bus" mogą parkować na tym parkingu
+   * **CarParking** - wszystkie pojazdy mechaniczne (EngineVehicleInterface) mogą parkować na tym parkingu, za wyjątkiem autobusów
+   * **TaxiParking** - tylko taksówki mogą parkować na tym parkingu
+   * **VehicleParking** - Chwilowo nie implementujemy
