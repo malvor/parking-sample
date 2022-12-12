@@ -28,6 +28,4 @@ class Money
    
 }
 
-$pay = new Money (1098);
-echo $pay->getAmount();
-echo $pay->getCurrency();
+
