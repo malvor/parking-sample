@@ -3,7 +3,12 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-class TaxiParking implements ParkingInterface
-{
+use AbstractParking;
 
+class TaxiParking extends AbstractParking implements ParkingInterface
+{
+    protected function canPark(VehicleInterface $vehicle) :bool
+    {
+        return $vehicle instanceof Taxi;
+    }
 }

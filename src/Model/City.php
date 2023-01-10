@@ -34,25 +34,27 @@ class City
 		$this->area       = $area;
 	}
 
-	public function addNewParking(): void
+	public function addNewParking(ParkingInterface $parking): void
     {
-        //TODO: implement
+        $this->parkings = $parking;
     }
 
-    public function removeParking(): void
+    public function removeParking(ParkingInterface $parking): void
     {
-        //TODO: implement
+		$key = array_search($parking, $this->parkings);
+		if ($key === false) {
+			throw new \Exception ("Value not found");
+		}
+		unset($this->parkings[$key]);
     }
 
     public function getTotalParking(): int
     {
-        //TODO: implement
-        return 0;
+		return count($this->parkings);
     }
 
-    public function getTotalParkingCapacities(): int
+    public function getTotalParkingCapacities(ParkingInterface $parking): int
     {
-        //TODO: implement
-        return 1;
+		return $this->parkings[$parking];
     }
 }
