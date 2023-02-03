@@ -1,3 +1,9 @@
 <?php
 
-echo "to jest napisane dobrze";
+
+function something() {
+    echo "to jest xle napisana funckcjia";
+    echo "może to będzie lepsze ?"
+}
+
+something();
