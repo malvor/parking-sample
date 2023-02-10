@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Model;
 
 class City
@@ -16,7 +17,7 @@ class City
 	/** @var float */
 	private $area;
 
-	private $parkings;
+	private array $parkings = [];
 
 	/**
 	 * City constructor.
@@ -34,25 +35,31 @@ class City
 		$this->area       = $area;
 	}
 
-	public function addNewParking(): void
+	public function addNewParking(ParkingInterface $newParking): void
     {
-        //TODO: implement
+		$this->parkings[] = $newParking;
     }
 
-    public function removeParking(): void
+    public function removeParking(ParkingInterface $parking): void
     {
-        //TODO: implement
+        $key = array_search($parking, $this->parkings);
+		if (!$key) {
+			throw new \Exception ("Parking not found");
+		}
+		unset($this->parkings[$key]);
     }
 
     public function getTotalParking(): int
     {
-        //TODO: implement
-        return 0;
+		return count($this->parkings);
     }
 
-    public function getTotalParkingCapacities(): int
-    {
-        //TODO: implement
-        return 1;
+    public function getTotalParkingCapacities()
+    {		
+		$total = 0;
+		foreach ($this->parkings as $parking) {
+			$total += $parking->getNumberOfPlaces();
+		}
+		return $total;
     }
 }

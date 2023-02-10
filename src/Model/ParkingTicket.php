@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use App\ValueObject\Money;
+
 class ParkingTicket
 {
     private $parkingStartDate;
@@ -12,10 +14,10 @@ class ParkingTicket
     private $price;
     
     public function __construct (
-        DateTime $parkingStartDate, 
+        \DateTime $parkingStartDate, 
         ParkingInterface $parking,
         VehicleInterface $vehicle,
-        DateTime $parkingEndDate = null,
+        \DateTime $parkingEndDate = null,
         Money $price = null
     ) {
         $this->parkingStartDate = $parkingStartDate;

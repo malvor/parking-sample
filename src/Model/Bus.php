@@ -5,5 +5,5 @@ namespace App\Model;
 
 class Bus implements VehicleInterface, EngineVehicleInterface
 {
-
+    
 }
